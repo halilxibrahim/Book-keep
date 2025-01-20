@@ -1,28 +1,30 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 
 export default function ReadingHours({ navigation }) {
   const [hours, setHours] = useState('');
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Haftada kaç saat kitap okuyorsunuz?</Text>
-      
-      <TextInput
-        style={styles.input}
-        value={hours}
-        onChangeText={setHours}
-        keyboardType="numeric"
-        placeholder="Saat giriniz"
-      />
-      
-      <TouchableOpacity 
-        style={styles.button}
-        onPress={() => navigation.navigate('WeeklyGoal', { readingHours: parseInt(hours) })}
-      >
-        <Text style={styles.buttonText}>Devam Et</Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Haftada kaç saat kitap okuyorsunuz?</Text>
+        
+        <TextInput
+          style={styles.input}
+          value={hours}
+          onChangeText={setHours}
+          keyboardType="numeric"
+          placeholder="Saat giriniz"
+        />
+        
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => navigation.navigate('WeeklyGoal', { readingHours: parseInt(hours) })}
+        >
+          <Text style={styles.buttonText}>Devam Et</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 }
 

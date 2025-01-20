@@ -1,16 +1,24 @@
-
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-export default function BookTypes({ navigation }) {
-  const [selectedTypes, setSelectedTypes] = useState([]);
+type RootStackParamList = {
+  WeeklyGoal: undefined;
+};
+
+type BookTypesProps = {
+  navigation: NativeStackNavigationProp<RootStackParamList>;
+};
+
+export default function BookTypes({ navigation }: BookTypesProps) {
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   
   const bookTypes = [
     'Roman', 'Bilim Kurgu', 'Fantastik', 'Tarih',
     'Bilim', 'Felsefe', 'Kişisel Gelişim', 'Biyografi'
   ];
 
-  const toggleType = (type) => {
+  const toggleType = (type: string) => {
     if (selectedTypes.includes(type)) {
       setSelectedTypes(selectedTypes.filter(t => t !== type));
     } else {
@@ -19,31 +27,33 @@ export default function BookTypes({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Hangi tür kitapları okumayı seviyorsunuz?</Text>
-      
-      <ScrollView style={styles.typeContainer}>
-        {bookTypes.map((type) => (
-          <TouchableOpacity
-            key={type}
-            style={[
-              styles.typeButton,
-              selectedTypes.includes(type) && styles.selectedType
-            ]}
-            onPress={() => toggleType(type)}
-          >
-            <Text style={styles.typeText}>{type}</Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-      
-      <TouchableOpacity 
-        style={styles.button}
-        onPress={() => navigation.navigate('WeeklyGoal')}
-      >
-        <Text style={styles.buttonText}>Devam Et</Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Hangi tür kitapları okumayı seviyorsunuz?</Text>
+        
+        <ScrollView style={styles.typeContainer}>
+          {bookTypes.map((type) => (
+            <TouchableOpacity
+              key={type}
+              style={[
+                styles.typeButton,
+                selectedTypes.includes(type) && styles.selectedType
+              ]}
+              onPress={() => toggleType(type)}
+            >
+              <Text style={styles.typeText}>{type}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+        
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => navigation.navigate('WeeklyGoal')}
+        >
+          <Text style={styles.buttonText}>Devam Et</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 }
 

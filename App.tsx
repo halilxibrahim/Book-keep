@@ -14,12 +14,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Onboarding">
-        <Stack.Screen name="Onboarding" component={Onboarding} />
-        <Stack.Screen name="ReadingHours" component={ReadingHours} />
-        <Stack.Screen name="BookTypes" component={BookTypes} />
-        <Stack.Screen name="WeeklyGoal" component={WeeklyGoal} />
-        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Ana Sayfa' }} />
-        <Stack.Screen name="AddBook" component={AddBookScreen} options={{ title: 'Kitap Ekle' }} />
+        <Stack.Screen name="Onboarding" component={Onboarding} options={{ headerShown: false }} />
+        <Stack.Screen name="ReadingHours" component={ReadingHours} options={{ headerShown: false }} />
+        <Stack.Screen name="BookTypes" component={BookTypes} options={{ headerShown: false }} />
+        <Stack.Screen name="WeeklyGoal" component={WeeklyGoal} options={{ headerShown: false }} />
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Ana Sayfa', headerShown: false }} />
+        <Stack.Screen name="AddBook" component={AddBookScreen} options={{ title: 'Kitap Ekle', headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

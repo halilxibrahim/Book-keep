@@ -1,25 +1,28 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { NavigationProp } from '@react-navigation/native';
 
-export default function Onboarding({ navigation }) {
+export default function Onboarding({ navigation }: { navigation: NavigationProp<any> }) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Book Keep</Text>
-      
-      <TouchableOpacity 
-        style={styles.googleButton}
-        onPress={() => navigation.navigate('ReadingHours')}
-      >
-        <Text style={styles.buttonText}>Google ile Giriş Yap</Text>
-      </TouchableOpacity>
-      
-      <TouchableOpacity 
-        style={styles.skipButton}
-        onPress={() => navigation.navigate('ReadingHours')}
-      >
-        <Text style={styles.skipButtonText}>Kaydolmadan Devam Et</Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Book Keep</Text>
+        
+        <TouchableOpacity 
+          style={styles.googleButton}
+          onPress={() => navigation.navigate('ReadingHours')}
+        >
+          <Text style={styles.buttonText}>Google ile Giriş Yap</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity 
+          style={styles.skipButton}
+          onPress={() => navigation.navigate('ReadingHours')}
+        >
+          <Text style={styles.skipButtonText}>Kaydolmadan Devam Et</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 }
 
