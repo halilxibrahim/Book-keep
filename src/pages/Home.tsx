@@ -24,6 +24,7 @@ interface CurrentBook {
   title: string;
   progress: number;
   totalPages: number;
+  author: string;
 }
 
 const ClockPieChart = ({ hours }: { hours: number }) => {
@@ -104,13 +105,13 @@ const HomeScreen = ({ route, navigation }: { route: any, navigation: any }) => {
 
   useEffect(() => {
     if (route.params?.newBook) {
-      const { title, progress, totalPages, readingTime } = route.params.newBook;
-      setCurrentlyReading(prev => [...prev, { title, progress, totalPages }]);
+      const { title, author, progress, totalPages, readingTime } = route.params.newBook;
+      setCurrentlyReading(prev => [...prev, { title, author, progress, totalPages }]);
       setWeeklyPages(prev => prev + progress);
       setReadingTime(prev => prev + readingTime);
 
       // Clear the params to prevent duplicate updates
-      navigation.setParams({ newBook: null });
+      navigation.setParams({ newBook: undefined });
     }
   }, [route.params?.newBook]);
 
@@ -201,8 +202,9 @@ const HomeScreen = ({ route, navigation }: { route: any, navigation: any }) => {
             <Text style={styles.sectionTitle}>Şu An Okuduğum</Text>
             {currentlyReading.map((book, index) => (
               <SwipeableRow key={index} onDelete={() => handleDeleteBook(index)}>
-                <View style={[styles.bookCard, { marginBottom: 12 }]}>
+                <View style={styles.bookCard}>
                   <Text style={styles.bookTitle}>{book.title}</Text>
+                  <Text style={styles.progressText}>{book.author}</Text>
                   <View style={styles.progressContainer}>
                     <View
                       style={[
@@ -339,7 +341,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     padding: 20,
     borderRadius: 16,
-    marginBottom: 16,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -347,6 +348,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     borderLeftWidth: 4,
     borderLeftColor: '#4A4AFF',
+    width: '100%', // Ensure full width
   },
   bookTitle: {
     fontSize: 18,
